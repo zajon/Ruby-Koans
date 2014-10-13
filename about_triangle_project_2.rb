@@ -6,6 +6,14 @@ require './triangle.rb'
 class AboutTriangleProject2 < Neo::Koan
   # The first assignment did not talk about how to handle errors.
   # Let's handle that part now.
+	def triangle(a, b, c)
+	  raise TriangleError unless a > 0 && b > 0 && c > 0
+	  raise TriangleError if a == b && a + b <= c
+	  raise TriangleError if a == c && a + c <= b
+	  return :equilateral if a == b && b == c
+	  return :isosceles   if a == b || b == c || c == a
+	  :scalene
+	end
   def test_illegal_triangles_throw_exceptions
     assert_raise(TriangleError) do triangle(0, 0, 0) end
     assert_raise(TriangleError) do triangle(3, 4, -5) end
